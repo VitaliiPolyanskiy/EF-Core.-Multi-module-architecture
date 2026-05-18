@@ -10,6 +10,9 @@ namespace AcademyGroupContextLibrary
     // Lazy loading або ліниве завантаження передбачає неявне автоматичне завантаження пов'язаних даних при зверненні до навігаційної властивості.
     // Microsoft.EntityFrameworkCore.Proxies
 
+    // Для роботи з БД SQLite необхідно додати пакет: 
+    // Microsoft.EntityFrameworkCore.Sqlite(представляє функціональність Entity Framework для роботи з SQLite)
+
     public class AcademyGroupContext : DbContext
     {
         static DbContextOptions<AcademyGroupContext> _options;
@@ -23,7 +26,9 @@ namespace AcademyGroupContextLibrary
             string? connectionString = config.GetConnectionString("DefaultConnection");
 
             var optionsBuilder = new DbContextOptionsBuilder<AcademyGroupContext>();
-            _options = optionsBuilder.UseSqlServer(connectionString).Options;
+            //_options = optionsBuilder.UseSqlServer(connectionString).Options;
+            _options = optionsBuilder.UseSqlite("Data Source=AcademyGroup.db").Options;
+
         }
 
         public AcademyGroupContext()
